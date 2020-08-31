@@ -22,12 +22,14 @@ describe("GET /api", () => {
   });
 
 
-  describe("GET /api/teams without query params", () => {
+  describe("GET /api/songs without query params", () => {
     // let request;
 
-    // console.log("test");
-    it("should respond all teams.", async () => {
-      const res = await request.get("/api/teams");
+    
+    it("should respond all songs.", async () => {
+      console.log("test");
+      const res = await request.get("/api/songs");
+      console.log("test2");
       // console.log(res)
       const result = JSON.parse(res.text);
       console.log(result);
@@ -35,13 +37,13 @@ describe("GET /api", () => {
     });
   });
 
-  describe("GET /api/players without query params", () => {
+  describe("GET /api/players without query members", () => {
     // let request;
 
     // console.log("test");
-    it("should respond all players", async () => {
+    it("should respond all memberss", async () => {
       console.log("2nd test")
-      const res = await request.get("/api/players");
+      const res = await request.get("/api/members");
       // console.log(res)
       const result = JSON.parse(res.text);
       console.log(result);

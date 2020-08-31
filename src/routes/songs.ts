@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { send } from "../helpers";
 import DatabaseConnectionManager from "../connection";
-import Team from "../entities/Song";
+import Song from "../entities/Song";
 const config = require("../ormconfig");
 import { Repository, getRepository, DeleteResult } from "typeorm";
 import { rawListeners } from "process";
@@ -10,7 +10,7 @@ import { rawListeners } from "process";
 export default function () {
   
   const router = Router();
-  // const teamRepository = getRepository(Team);
+  // const songRepository = getRepository(Song);
   // const DB = new DatabaseConnectionManager();
 
   // This endpoint should return all quotes in the database
@@ -20,12 +20,12 @@ export default function () {
 
   router.get("/", async (req, res) => {
     // FIXME your code here
-    let teamRepo: Repository<Team>;
+    let songRepo: Repository<Song>;
 
-    teamRepo = getRepository(Team);
-    const allTeams = await teamRepo.find();
-    // let allTeams = await teamRepository.find();
-    res.json(allTeams);
+    songRepo = getRepository(Song);
+    const allSongs = await songRepo.find();
+    // let allSongs = await songRepository.find();
+    res.json(allSongs);
   });
 
   return router;
