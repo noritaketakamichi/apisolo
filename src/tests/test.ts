@@ -27,27 +27,31 @@ describe("GET /api", () => {
 
     
     it("should respond all songs.", async () => {
-      console.log("test");
       const res = await request.get("/api/songs");
-      console.log("test2");
-      // console.log(res)
       const result = JSON.parse(res.text);
-      console.log(result);
-      result.length.should.deep.equal(3);
+      result.length.should.above(2);
+    });
+
+    it("should return searched song.", async () => {
+      const res = await request.get("/api/songs/search/Sing");
+      const result = JSON.parse(res.text);
+      result.should.equal("Sing out!");
     });
   });
 
   describe("GET /api/players without query members", () => {
     // let request;
 
-    // console.log("test");
     it("should respond all memberss", async () => {
-      console.log("2nd test")
       const res = await request.get("/api/members");
-      // console.log(res)
       const result = JSON.parse(res.text);
-      console.log(result);
-      result.length.should.deep.equal(3);
+      result.length.should.above(2);
+    });
+
+    it("should respond searched member", async () => {
+      const res = await request.get("/api/members/search/Aki");
+      const result = JSON.parse(res.text);
+      result.should.equal("Manatsu Akimoto");
     });
   });
 });
