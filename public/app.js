@@ -1,5 +1,11 @@
 const addImg = async () => {
   console.log(111);
+
+  //remove photo
+  const parent = document.getElementById("flame");
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
   let str = document.getElementById("input").value;
   let url;
   if (str) {
@@ -14,6 +20,6 @@ const addImg = async () => {
     let child = document.createElement("img");
     child.src = imgURL;
     child.classList.add("member");
-    document.body.appendChild(child);
+    parent.appendChild(child);
   }
 };
