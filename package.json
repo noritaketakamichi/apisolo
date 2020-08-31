@@ -12,7 +12,9 @@
     "makeMigrations": "yarn orm migration:generate",
     "migrate": "yarn orm migration:run",
     "seeder": "ts-node -r dotenv/config ./node_modules/typeorm-seeding/dist/cli.js",
-    "seed": "yarn seeder --configName src/ormconfig.ts seed"
+    "seed": "yarn seeder --configName src/ormconfig.ts seed",
+    "nodemon": "nodemon ./src/index.js",
+    "start": "node ./src/index.js"
   },
   "husky": {
     "hooks": {
@@ -32,7 +34,8 @@
     "pg": "^8.2.1",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.25",
-    "typeorm-seeding": "^1.6.1"
+    "typeorm-seeding": "^1.6.1",
+    "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {
     "@types/chai": "^4.2.11",

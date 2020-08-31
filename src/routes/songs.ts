@@ -7,8 +7,7 @@ import { Repository, getRepository, DeleteResult, Like } from "typeorm";
 import { rawListeners } from "process";
 
 /***Quotes***/
-export default function () {
-
+export default function() {
   const router = Router();
 
   // This endpoint should return all quotes in the database
@@ -21,6 +20,7 @@ export default function () {
 
     songRepo = getRepository(Song);
     const allSongs = await songRepo.find();
+    res.set("Access-Control-Allow-Origin", "*");
     res.json(allSongs);
   });
 
@@ -30,8 +30,8 @@ export default function () {
 
     songRepo = getRepository(Song);
     const input = req.params.input;
-    const targetSongs = await songRepo
-      .find({ name: Like(`%${input}%`) });
+    const targetSongs = await songRepo.find({ name: Like(`%${input}%`) });
+    res.set("Access-Control-Allow-Origin", "*");
     res.json(targetSongs[0]);
   });
 
@@ -45,7 +45,7 @@ export default function () {
     song.name = name;
 
     await songRepo.save(song);
-
+    res.set("Access-Control-Allow-Origin", "*");
     res.json(song);
   });
 
@@ -58,21 +58,20 @@ export default function () {
     console.log(before);
     let targetSong;
     if (!isNaN(before)) {
-
-      targetSong = await songRepo.findOne(Number(before))
+      targetSong = await songRepo.findOne(Number(before));
     } else {
-      console.log(22222)
+      console.log(22222);
       const targetSongArr = await songRepo.find({ name: before });
       targetSong = targetSongArr[0];
     }
 
-    console.log(targetSong)
+    console.log(targetSong);
 
     const after = req.params.after;
     targetSong.name = after;
 
     await songRepo.save(targetSong);
-
+    res.set("Access-Control-Allow-Origin", "*");
     res.json(targetSong);
   });
 
@@ -85,7 +84,6 @@ export default function () {
     // console.log(before);
     let targetSong;
     if (!isNaN(input)) {
-
       targetSong = await songRepo.findOne(Number(before));
     } else {
       const targetSongArr = await songRepo.find({ name: input });
@@ -93,7 +91,7 @@ export default function () {
     }
 
     await songRepo.remove(targetSong);
-
+    res.set("Access-Control-Allow-Origin", "*");
     res.json(targetSong);
   });
 
