@@ -22,9 +22,7 @@ describe("GET /api", () => {
   });
 
 
-  describe("GET /api/songs without query params", () => {
-    // let request;
-
+  describe("/api/songs", () => {
     
     it("should respond all songs.", async () => {
       const res = await request.get("/api/songs");
@@ -62,16 +60,24 @@ describe("GET /api", () => {
       result.name.should.equal("Test!");
     });
 
-    it("should change song.", async () => {
+    it("should delete song.", async () => {
 
       //DBに追加は目視しかしていない
-      const res = await request.patch("/api/songs/Sing out!/Test!");
+      const res = await request.delete("/api/songs/TEST!");
+      const result = JSON.parse(res.text);
+      result.name.should.equal("TEST!");
+    });
+
+    it("should delete song.", async () => {
+
+      //DBに追加は目視しかしていない
+      const res = await request.delete("/api/songs/Kaerimichi ha toomawari shitakunaru");
       const result = JSON.parse(res.text);
       result.name.should.equal("Test!");
     });
   });
 
-  describe("GET /api/players without query members", () => {
+  describe("/api/players", () => {
     // let request;
 
     it("should respond all memberss", async () => {
@@ -95,7 +101,7 @@ describe("GET /api", () => {
     });
 
 
-    it("should change song.", async () => {
+    it("should change member.", async () => {
 
       //DBに追加は目視しかしていない
       const res = await request.patch("/api/members/20/Test!");
@@ -103,12 +109,28 @@ describe("GET /api", () => {
       result.name.should.equal("Test!");
     });
 
-    it.only("should change song.", async () => {
+    it("should change member.", async () => {
 
       //DBに追加は目視しかしていない
       const res = await request.patch("/api/members/Renka Iwamoto/Test!");
       const result = JSON.parse(res.text);
       result.name.should.equal("Test!");
+    });
+
+    it("should delete member.", async () => {
+
+      //DBに追加は目視しかしていない
+      const res = await request.delete("/api/members/21");
+      const result = JSON.parse(res.text);
+      result.name.should.equal("Erika Ikuta");
+    });
+
+    it("should delete member.", async () => {
+
+      //DBに追加は目視しかしていない
+      const res = await request.delete("/api/members/Riria Ito");
+      const result = JSON.parse(res.text);
+      result.name.should.equal("Riria Ito");
     });
   });
 });

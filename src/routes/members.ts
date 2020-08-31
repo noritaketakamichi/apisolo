@@ -70,6 +70,27 @@ export default function () {
     res.json(targetSong);
   });
 
+    //delete member
+    router.delete("/:input", async (req, res) => {
+      // FIXME your code here
+  
+      memberRepo = getRepository(Member);
+      const input = req.params.input;
+      console.log(input);
+      let targetMember;
+      if (!isNaN(input)) {
+  
+        targetMember = await memberRepo.findOne(Number(input));
+      } else {
+        const targetMemberArr = await memberRepo.find({ name: input });
+        targetMember = targetMemberArr[0];
+      }
+  
+      await memberRepo.remove(targetMember);
+  
+      res.json(targetMember);
+    });
+
 
 
   return router;

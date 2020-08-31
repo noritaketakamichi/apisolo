@@ -49,32 +49,53 @@ export default function () {
     res.json(song);
   });
 
-    //change song
-    router.patch("/:before/:after", async (req, res) => {
-      // FIXME your code here
-      
-      songRepo = getRepository(Song);
-      const before = req.params.before;
-      console.log(before);
-      let targetSong;
-      if (!isNaN(before)) {
-        
-        targetSong = await songRepo.findOne(Number(before))
-      } else {
-        console.log(22222)
-        const targetSongArr = await songRepo.find({ name: before });
-        targetSong=targetSongArr[0];
-      }
-  
-      console.log(targetSong)
+  //change song
+  router.patch("/:before/:after", async (req, res) => {
+    // FIXME your code here
 
-      const after = req.params.after;
-      targetSong.name=after;
-  
-      await songRepo.save(targetSong);
-  
-      res.json(targetSong);
-    });
+    songRepo = getRepository(Song);
+    const before = req.params.before;
+    console.log(before);
+    let targetSong;
+    if (!isNaN(before)) {
+
+      targetSong = await songRepo.findOne(Number(before))
+    } else {
+      console.log(22222)
+      const targetSongArr = await songRepo.find({ name: before });
+      targetSong = targetSongArr[0];
+    }
+
+    console.log(targetSong)
+
+    const after = req.params.after;
+    targetSong.name = after;
+
+    await songRepo.save(targetSong);
+
+    res.json(targetSong);
+  });
+
+  //delete song
+  router.delete("/:input", async (req, res) => {
+    // FIXME your code here
+
+    songRepo = getRepository(Song);
+    const input = req.params.input;
+    // console.log(before);
+    let targetSong;
+    if (!isNaN(input)) {
+
+      targetSong = await songRepo.findOne(Number(before));
+    } else {
+      const targetSongArr = await songRepo.find({ name: input });
+      targetSong = targetSongArr[0];
+    }
+
+    await songRepo.remove(targetSong);
+
+    res.json(targetSong);
+  });
 
   return router;
 }
