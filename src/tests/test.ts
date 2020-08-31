@@ -35,7 +35,39 @@ describe("GET /api", () => {
     it("should return searched song.", async () => {
       const res = await request.get("/api/songs/search/Sing");
       const result = JSON.parse(res.text);
-      result.should.equal("Sing out!");
+      result.name.should.equal("Sing out!");
+    });
+
+    it("should add song.", async () => {
+
+      //DBに追加は目視しかしていない
+      const res = await request.post("/api/songs/TEST!");
+      const result = JSON.parse(res.text);
+      result.name.should.equal("TEST!");
+    });
+
+    it("should change song.", async () => {
+
+      //DBに追加は目視しかしていない
+      const res = await request.patch("/api/songs/?before=4&after=Test!");
+      const result = JSON.parse(res.text);
+      result.name.should.equal("Test!");
+    });
+
+    it("should change song.", async () => {
+
+      //DBに追加は目視しかしていない
+      const res = await request.patch("/api/songs/9/Test!");
+      const result = JSON.parse(res.text);
+      result.name.should.equal("Test!");
+    });
+
+    it("should change song.", async () => {
+
+      //DBに追加は目視しかしていない
+      const res = await request.patch("/api/songs/Sing out!/Test!");
+      const result = JSON.parse(res.text);
+      result.name.should.equal("Test!");
     });
   });
 
@@ -52,6 +84,31 @@ describe("GET /api", () => {
       const res = await request.get("/api/members/search/Aki");
       const result = JSON.parse(res.text);
       result.should.equal("Manatsu Akimoto");
+    });
+
+    it("should add member.", async () => {
+
+      //DBに追加は目視しかしていない
+      const res = await request.post("/api/members/Hanako Test");
+      const result = JSON.parse(res.text);
+      result.name.should.equal("Hanako Test");
+    });
+
+
+    it("should change song.", async () => {
+
+      //DBに追加は目視しかしていない
+      const res = await request.patch("/api/members/20/Test!");
+      const result = JSON.parse(res.text);
+      result.name.should.equal("Test!");
+    });
+
+    it.only("should change song.", async () => {
+
+      //DBに追加は目視しかしていない
+      const res = await request.patch("/api/members/Renka Iwamoto/Test!");
+      const result = JSON.parse(res.text);
+      result.name.should.equal("Test!");
     });
   });
 });
