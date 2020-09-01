@@ -52,23 +52,23 @@ export default function() {
     memberRepo = getRepository(Member);
     const before = req.params.before;
     console.log(before);
-    let targetSong;
+    let targetMember;
     if (!isNaN(before)) {
-      targetSong = await memberRepo.findOne(Number(before));
+      targetMember = await memberRepo.findOne(Number(before));
     } else {
       console.log(22222);
-      const targetSongArr = await memberRepo.find({ name: before });
-      targetSong = targetSongArr[0];
+      const targetMemberArr = await memberRepo.find({ name: before });
+      targetMember = targetMemberArr[0];
     }
 
-    console.log(targetSong);
+    console.log(targetMember);
 
     const after = req.params.after;
-    targetSong.name = after;
+    targetMember.name = after;
     res.set("Access-Control-Allow-Origin", "*");
-    await memberRepo.save(targetSong);
+    await memberRepo.save(targetMember);
 
-    res.json(targetSong);
+    res.json(targetMember);
   });
 
   //delete member
@@ -85,9 +85,9 @@ export default function() {
       const targetMemberArr = await memberRepo.find({ name: input });
       targetMember = targetMemberArr[0];
     }
-
-    await memberRepo.remove(targetMember);
     res.set("Access-Control-Allow-Origin", "*");
+    await memberRepo.remove(targetMember);
+
     res.json(targetMember);
   });
 

@@ -2,6 +2,20 @@
 
 乃木坂のメンバー管理及び、曲ごとの選抜メンバーの管理ができる API です。
 
+## はじめに
+
+postgres のデータベースに nogizaka という名のデータベースを作成し、<br>
+yarn、yarn migrate、
+yarn seed<br>
+してセットアップしてください。<br><br>
+
+加えて、.env ファイルを作成し、以下のようにユーザー名と URL を設定してください
+
+```
+DB_NAME=【ユーザ名】
+DATABASE_URL=postgres://【ユーザ名】@localhost/baseball
+```
+
 ## API の内容
 
 ### メンバー
