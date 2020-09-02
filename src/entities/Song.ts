@@ -1,10 +1,10 @@
 // import { Player } from "./Member";
 // This class is missing important decorators! Add the missing decorators to properly declare the entity.
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryColumn, Column, OneToMany } from "typeorm";
 
 @Entity()
 export class Song {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   id: number;
 
   @Column({ nullable: false })
