@@ -9,9 +9,9 @@ export = {
   url: process.env.DATABASE_URL,
   host: process.env.DB_HOST || "localhost",
   port: process.env.DB_PORT || 5432,
-  username: process.env.DB_USER || "baseball",
-  password: process.env.DB_PASSWORD || "baseball",
-  database: process.env.DB_NAME || "baseball",
+  username: process.env.DB_USER || "nogizaka",
+  password: process.env.DB_PASSWORD || "nogizaka",
+  database: process.env.DB_NAME || "nogizaka",
   entities: ["src/entities/**/*.ts"],
   migrations: ["src/migrations/**/*.ts"],
   seeds: ["src/seeds/**/*.ts"],
@@ -19,6 +19,6 @@ export = {
   migrationsRun: false /* Disable auto-run migration */,
   cli: {
     entitiesDir: "src/entities",
-    migrationsDir: "src/migrations",
-  },
+    migrationsDir: "src/migrations"
+  }
 };

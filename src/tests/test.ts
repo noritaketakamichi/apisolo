@@ -40,6 +40,13 @@ describe("GET /api", () => {
       result.name.should.equal("Sing out!");
     });
 
+    it.only("should return selected members of the song.", async () => {
+      const res = await request.get("/api/songs/search/member/2");
+      const result = JSON.parse(res.text);
+      console.log(result);
+      result.length.should.equal(2);
+    });
+
     xit("should add song.", async () => {
       //DBに追加は目視しかしていない
       const res = await request.post("/api/songs/TEST!");

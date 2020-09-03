@@ -18,7 +18,7 @@ export class MemberSong {
     type => Song,
     song => song.id
   )
-  song: Song;
+  song: Song[];
 }
 
 export default MemberSong;

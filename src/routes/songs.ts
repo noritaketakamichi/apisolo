@@ -40,6 +40,22 @@ export default function() {
     res.json(targetSongs);
   });
 
+  //search selected members of the song
+  router.get("/search/member/:input", async (req, res) => {
+    // FIXME your code here
+    songRepo = getRepository(Song);
+    const input = req.params.input;
+    console.log("selected member");
+    const members = await songRepo
+      .createQueryBuilder("song")
+      .leftJoinAndSelect("song.member_song", "member_song")
+      .leftJoinAndSelect("member_song.member", "member")
+      .where("song.id = :id", { id: `${Number(input)}` })
+      .getMany();
+    res.set("Access-Control-Allow-Origin", "*");
+    res.json(members[0].member_song);
+  });
+
   //add song
   router.post("/:name", async (req, res) => {
     // FIXME your code here

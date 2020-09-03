@@ -13,7 +13,7 @@ yarn seed<br>
 
 ```
 DB_NAME=【ユーザ名】
-DATABASE_URL=postgres://【ユーザ名】@localhost/baseball
+DATABASE_URL=postgres://【ユーザ名】@localhost/nogizaka
 ```
 
 ## API の内容
