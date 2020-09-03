@@ -20,9 +20,32 @@ const showSong = async () => {
     let child = document.createElement("img");
     child.src = imgURL;
     child.alt = song.name;
+    child.id = song.id;
     child.classList.add("song");
+    child.addEventListener("click", function() {
+      showSongMessage(this.id);
+    });
     parent.appendChild(child);
   }
+};
+
+const showSongMessage = async id => {
+  console.log(`Hello${name}`);
+  //remove photo
+  const parent = document.getElementById("flame");
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
+  const url = `http://localhost:7000/api/songs/search/${id}`;
+  let fetched = await fetch(url).catch(() => console.log("error1"));
+  let member = await fetched.json().catch(() => console.log("error2"));
+  let child = document.createElement("img");
+  child.src = member.photoURL;
+  child.classList.add("singlesong");
+  parent.appendChild(child);
+  let pTag = document.createElement("p");
+  pTag.innerHTML = member.name;
+  parent.appendChild(pTag);
 };
 
 //add song

@@ -20,13 +20,18 @@ export default function() {
   });
 
   //search member
+  //we can input id or name
   router.get("/search/:input", async (req, res) => {
     // FIXME your code here
 
     memberRepo = getRepository(Member);
     const input = req.params.input;
-    const targetMembers = await memberRepo.find({ name: Like(`%${input}%`) });
-
+    let targetMembers;
+    if (!isNaN(input)) {
+      targetMembers = await memberRepo.findOne(Number(input));
+    } else {
+      targetMembers = await memberRepo.find({ name: Like(`%${input}%`) });
+    }
     res.set("Access-Control-Allow-Origin", "*");
     res.json(targetMembers);
   });

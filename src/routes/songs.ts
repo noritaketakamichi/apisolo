@@ -30,9 +30,14 @@ export default function() {
 
     songRepo = getRepository(Song);
     const input = req.params.input;
-    const targetSongs = await songRepo.find({ name: Like(`%${input}%`) });
+    let targetSongs;
+    if (!isNaN(input)) {
+      targetSongs = await songRepo.findOne(Number(input));
+    } else {
+      targetSongs = await songRepo.find({ name: Like(`%${input}%`) });
+    }
     res.set("Access-Control-Allow-Origin", "*");
-    res.json(targetSongs[0]);
+    res.json(targetSongs);
   });
 
   //add song

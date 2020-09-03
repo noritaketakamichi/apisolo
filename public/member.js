@@ -1,7 +1,7 @@
 const showMember = async () => {
   console.log(111);
 
-  //remove photo
+  //show photo
   const parent = document.getElementById("flame");
   while (parent.firstChild) {
     parent.removeChild(parent.firstChild);
@@ -20,32 +20,32 @@ const showMember = async () => {
     let child = document.createElement("img");
     child.src = imgURL;
     child.alt = member.name;
-    // child.id=member.id;
+    child.id = member.id;
     // child.value=member.id;
     child.classList.add("member");
     // console.log(child);
     child.addEventListener("click", function() {
-      showMessage(this.alt);
+      showMemberMessage(this.id);
     });
     parent.appendChild(child);
   }
 };
 
-const showMessage = async name => {
+const showMemberMessage = async id => {
   console.log(`Hello${name}`);
   //remove photo
   const parent = document.getElementById("flame");
   while (parent.firstChild) {
     parent.removeChild(parent.firstChild);
   }
-  const url = `http://localhost:7000/api/members/search/${name}`;
+  const url = `http://localhost:7000/api/members/search/${id}`;
   let fetched = await fetch(url).catch(() => console.log("error1"));
   let member = await fetched.json().catch(() => console.log("error2"));
   let child = document.createElement("img");
-  child.src = member[0].photoURL;
+  child.src = member.photoURL;
   parent.appendChild(child);
   let pTag = document.createElement("p");
-  pTag.innerHTML = name;
+  pTag.innerHTML = member.name;
   parent.appendChild(pTag);
 };
 
